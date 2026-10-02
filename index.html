@@ -295,7 +295,10 @@
   .demo-note::before{content:"●";color:var(--violet-bright);font-size:9px;}
 
   /* ---------- Live site preview (iframe thumbnail) ---------- */
-  .site-preview-frame{position:relative;width:100%;padding-bottom:64%;overflow:hidden;background:#0B0714;}
+  .site-preview-frame{position:relative;width:100%;flex:1;min-height:420px;overflow:hidden;background:#0B0714;}
+  @media (max-width:920px){.site-preview-frame{flex:none;min-height:0;padding-bottom:64%;}}
+  /* Website cards show their full content, with no inner scrollbar */
+  #website-funnel .project-body{max-height:none;overflow-y:visible;}
   .site-preview-frame iframe{position:absolute;top:0;left:0;width:250%;height:250%;border:0;transform:scale(0.4);transform-origin:0 0;pointer-events:none;}
   .site-link-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
   .site-link{
