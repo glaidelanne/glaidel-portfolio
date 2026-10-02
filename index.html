@@ -898,6 +898,51 @@
   :root:not([data-theme=dark]) .hero-photo{filter:none;}
   :root:not([data-theme=dark]) .hero{--hero-sheen:none;}
   .hero-photo::after{box-shadow:none;}
+
+  /* ---------- Coverflow project cards ---------- */
+  .carousel>.carousel-track{display:none;}
+  .cf{position:relative;width:100%;margin:0 auto;touch-action:pan-y;user-select:none;-webkit-user-select:none;outline:none;}
+  .cf-card{position:absolute;left:50%;top:0;cursor:pointer;border-radius:26px;overflow:hidden;background:#0c1511;color:#fff;container-type:size;
+    transition:transform .6s cubic-bezier(.22,.8,.24,1),opacity .45s ease,box-shadow .45s ease;box-shadow:0 30px 60px -28px rgba(8,30,20,.45);will-change:transform;
+    border:1px solid rgba(255,255,255,.14);}
+  .cf-card.is-active{border-color:rgba(255,255,255,.55);box-shadow:0 40px 80px -30px rgba(8,30,20,.6);cursor:default;}
+  .cf-media{position:absolute;inset:0;overflow:hidden;background:linear-gradient(150deg,#12382a,#0a1712);}
+  .cf-media img{width:100%;height:100%;object-fit:cover;display:block;}
+  .cf-media .cf-site{position:absolute;left:0;top:0;width:1280px;height:800px;transform-origin:0 0;pointer-events:none;}
+  .cf-media .cf-site iframe{width:100%;height:100%;border:0;background:#fff;}
+  .cf-media .mock-stage{pointer-events:none;}
+  .cf-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,12,9,.35) 0%,rgba(6,12,9,.2) 35%,rgba(6,12,9,.88) 100%);transition:background .45s ease;}
+  .cf-card.is-active .cf-shade{background:linear-gradient(180deg,rgba(6,12,9,.4) 0%,rgba(6,12,9,.55) 38%,rgba(6,12,9,.94) 100%);}
+  .cf-pill{position:absolute;left:18px;top:18px;background:rgba(255,255,255,.92);color:#0F2A1E;font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;z-index:2;}
+  .cf-text{position:absolute;left:0;right:0;bottom:0;padding:0 clamp(18px,5cqw,40px) clamp(18px,5cqw,34px);z-index:2;}
+  .cf-text h3{font-family:var(--serif);font-weight:700;color:#fff;margin:0;line-height:1.08;font-size:clamp(20px,5.6cqw,40px);text-shadow:0 2px 18px rgba(0,0,0,.4);}
+  .cf-desc,.cf-tags,.cf-go{opacity:0;transform:translateY(16px);transition:opacity .4s ease,transform .5s cubic-bezier(.22,.8,.24,1);pointer-events:none;}
+  .cf-desc{margin:12px 0 0;font-size:clamp(13px,2.15cqw,16px);line-height:1.5;color:rgba(255,255,255,.88);max-width:88%;max-height:0;overflow:hidden;}
+  .cf-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .cf-tags span{font-size:12px;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:5px 12px;border-radius:100px;}
+  .cf-go{position:absolute;right:clamp(18px,4cqw,32px);bottom:clamp(18px,4cqw,30px);width:44px;height:44px;border-radius:50%;background:#fff;color:#0F2A1E;border:0;font-size:20px;cursor:pointer;display:grid;place-items:center;}
+  .cf-card.is-active .cf-desc{opacity:1;transform:none;max-height:9em;transition-delay:.18s;pointer-events:auto;}
+  .cf-card.is-active .cf-tags{opacity:1;transform:none;transition-delay:.28s;pointer-events:auto;}
+  .cf-card.is-active .cf-go{opacity:1;transform:none;transition-delay:.38s;pointer-events:auto;}
+  .cf-hint{text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);margin-top:12px;}
+  .cf-modal{position:fixed;inset:0;z-index:300;background:rgba(5,12,9,.72);display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:5vh 16px;}
+  .cf-modal.open{display:flex;}
+  .cf-modal-body{width:min(1040px,100%);position:relative;}
+  .cf-modal-body .project{opacity:1;transform:none;}
+  .cf-close{position:sticky;top:0;float:right;z-index:5;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:#0F2A1E;font-size:24px;cursor:pointer;margin:0 0 -42px 0;box-shadow:0 6px 20px rgba(0,0,0,.3);}
+  @media(prefers-reduced-motion:reduce){.cf-card,.cf-desc,.cf-tags,.cf-go{transition:none;}}
+  .carousel{overflow-x:clip;}
+  .cf{overflow:visible;}
+  @container (max-width:430px){.cf-tags span:nth-child(n+3){display:none}.cf-text h3{font-size:22px}.cf-desc{max-width:100%;font-size:13px}.cf-go{display:none}}
+
+  .cta-sticker{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:800;letter-spacing:.01em;padding:12px 22px 12px 18px;border-radius:100px;top:30px;
+    background:linear-gradient(135deg,#FFE98F 0%,#FFD24A 55%,#F6B92B 100%);border:2px solid rgba(255,255,255,.75);
+    box-shadow:0 14px 30px -8px rgba(8,30,20,.45),0 0 0 6px rgba(255,210,74,.22);white-space:nowrap;}
+  .cs-dot{width:11px;height:11px;border-radius:50%;background:#16A34A;box-shadow:0 0 0 0 rgba(22,163,74,.6);animation:pulse 2s infinite;flex:none;}
+  .cs-sp{position:absolute;color:#FFD24A;font-size:18px;line-height:1;text-shadow:0 2px 8px rgba(8,30,20,.35);animation:twinkle 2.4s ease-in-out infinite;}
+  .cs-a{right:-14px;top:-12px;}
+  .cs-b{left:-12px;bottom:-10px;font-size:13px;color:#fff;animation-delay:1.1s;}
+  @media(max-width:480px){.cta-sticker{font-size:13px;padding:10px 16px 10px 14px;}}
 </style>
 </head>
 <body>
@@ -1667,7 +1712,7 @@
 </section>
 
 <section class="cta-footer" id="contact">
-  <div class="cta-sticker">Open to new projects</div>
+  <div class="cta-sticker"><span class="cs-dot"></span>Open to new projects<span class="cs-sp cs-a">&#10022;</span><span class="cs-sp cs-b">&#10022;</span></div>
   <div class="wrap">
     <div class="eyebrow" style="justify-content:center;display:flex;">Let's Talk</div>
     <h2>Ready to <em style="color:var(--violet-bright);font-style:normal;">Automate</em><br>What's Slowing You Down?</h2>
@@ -1788,40 +1833,115 @@
     try{ localStorage.setItem('theme', next); }catch(e){}
   });
 
-  // Project carousels
+  // Project carousels (coverflow)
+  const cfModal = document.createElement('div');
+  cfModal.className = 'cf-modal';
+  cfModal.innerHTML = '<div class="carousel cf-modal-body"><button class="cf-close" type="button" aria-label="Close">&times;</button><div class="cf-slot"></div></div>';
+  document.body.appendChild(cfModal);
+  const cfSlot = cfModal.querySelector('.cf-slot');
+  function cfClose(){ cfModal.classList.remove('open'); cfSlot.innerHTML=''; document.body.style.overflow=''; }
+  cfModal.addEventListener('click', e=>{ if(e.target===cfModal || e.target.classList.contains('cf-close')) cfClose(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') cfClose(); });
+  const clean = s => s.replace(/\s+/g,' ').replace(/[\u2013\u2014]/g,',').replace(/-/g,' ').trim();
+
   document.querySelectorAll('[data-carousel]').forEach(c=>{
     const track = c.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
+    const slides = Array.from(track.children).filter(n=>n.classList.contains('project'));
     const count = c.querySelector('.car-count');
     const pad = n => String(n).padStart(2,'0');
-    let raf = 0;
-    function update(){
-      const mid = track.scrollLeft + track.clientWidth/2;
-      let best = 0, bd = Infinity;
-      slides.forEach((sl,i)=>{
-        const d = Math.abs(sl.offsetLeft + sl.offsetWidth/2 - mid);
-        if(d < bd){ bd = d; best = i; }
-      });
-      slides.forEach((sl,i)=>sl.classList.toggle('is-active', i === best));
-      count.textContent = pad(best+1) + ' / ' + pad(slides.length);
-      track.style.height = (slides[best].offsetHeight + 36) + 'px';
-      return best;
-    }
-    function go(i){
-      i = Math.max(0, Math.min(slides.length-1, i));
-      const sl = slides[i];
-      track.scrollTo({left: sl.offsetLeft + sl.offsetWidth/2 - track.clientWidth/2, behavior: 'smooth'});
-    }
-    track.addEventListener('scroll', ()=>{ cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, {passive:true});
-    c.querySelectorAll('.car-btn').forEach(b=>b.addEventListener('click', ()=>go(update() + Number(b.dataset.dir))));
-    track.addEventListener('keydown', e=>{
-      if(e.key === 'ArrowRight'){ e.preventDefault(); go(update()+1); }
-      if(e.key === 'ArrowLeft'){ e.preventDefault(); go(update()-1); }
+    const stage = document.createElement('div');
+    stage.className = 'cf'; stage.tabIndex = 0;
+    stage.setAttribute('role','region'); stage.setAttribute('aria-label', track.getAttribute('aria-label')||'Projects');
+    track.insertAdjacentElement('afterend', stage);
+    const hint = document.createElement('div'); hint.className='cf-hint'; hint.textContent='Drag or click to explore';
+    const nav = c.querySelector('.carousel-nav'); nav.insertAdjacentElement('afterend', hint);
+
+    const cards = slides.map((sl,i)=>{
+      const card = document.createElement('div'); card.className='cf-card';
+      const media = document.createElement('div'); media.className='cf-media';
+      const yt = sl.querySelector('iframe[src*="youtube.com/embed/"]');
+      const site = sl.querySelector('.site-preview-frame iframe');
+      const mock = sl.querySelector('.mock-stage');
+      if(yt){
+        const id = (yt.src.match(/embed\/([\w-]+)/)||[])[1];
+        const im = document.createElement('img'); im.alt=''; im.loading='lazy';
+        im.src = 'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg'; im.onerror=()=>im.remove();
+        media.appendChild(im);
+      } else if(site){
+        const w = document.createElement('div'); w.className='cf-site';
+        const f = document.createElement('iframe'); f.src=site.src; f.loading='lazy'; f.tabIndex=-1; f.title='';
+        w.appendChild(f); media.appendChild(w);
+      } else if(mock){
+        media.appendChild(mock.cloneNode(true));
+      }
+      const badge = sl.querySelector('.badge');
+      const pill = document.createElement('span'); pill.className='cf-pill'; pill.textContent = badge? clean(badge.textContent):'';
+      const shade = document.createElement('div'); shade.className='cf-shade';
+      const txt = document.createElement('div'); txt.className='cf-text';
+      const h3 = document.createElement('h3'); h3.textContent = clean(sl.querySelector('h3').textContent);
+      const p = sl.querySelector('.project-block p, .pr-block p');
+      let d = p? clean(p.textContent):'';
+      if(d.length>170){ d = d.slice(0,170); d = d.slice(0, d.lastIndexOf(' ')) + '…'; }
+      const desc = document.createElement('p'); desc.className='cf-desc'; desc.textContent=d;
+      const tags = document.createElement('div'); tags.className='cf-tags';
+      Array.from(sl.querySelectorAll('.project-stack span')).slice(0,3).forEach(s=>{ const t=document.createElement('span'); t.textContent=clean(s.textContent); tags.appendChild(t); });
+      const go = document.createElement('button'); go.type='button'; go.className='cf-go'; go.setAttribute('aria-label','Open case study'); go.innerHTML='&rarr;';
+      txt.append(h3, desc, tags);
+      card.append(media, shade, pill, txt, go);
+      stage.appendChild(card);
+      return card;
     });
-    window.addEventListener('resize', update);
-    window.addEventListener('load', update);
-    if('ResizeObserver' in window){ const ro = new ResizeObserver(()=>update()); slides.forEach(sl=>ro.observe(sl)); }
-    update();
+
+    let active = 0, drag = null, moved = false;
+    function open(i){
+      cfSlot.innerHTML=''; cfSlot.appendChild(slides[i].cloneNode(true));
+      cfModal.classList.add('open'); cfModal.scrollTop=0; document.body.style.overflow='hidden';
+    }
+    function layout(){
+      const cw = c.clientWidth, narrow = cw < 700;
+      const W = Math.min(730, cw*(narrow?0.84:0.62));
+      const Hh = narrow ? W*1.38 : W*0.69;
+      stage.style.height = (Hh+50)+'px';
+      cards.forEach((card,i)=>{
+        const n = cards.length; let o = ((i-active)%n+n)%n; if(o>n/2) o-=n; const ao = Math.abs(o);
+        const jump = card._o!==undefined && Math.abs(o-card._o)>2; card._o = o;
+        card.style.transition = jump ? 'none' : '';
+        card.style.width = W+'px'; card.style.height = Hh+'px';
+        const tx = o*W*(narrow?0.6:0.56), sc = 1-0.09*Math.min(ao,2), rot = o*(narrow?3:2.4), ty = 12*Math.min(ao,2)+ (o===0?0:6);
+        card.style.transform = 'translateX(calc(-50% + '+tx+'px)) translateY('+ty+'px) rotate('+rot+'deg) scale('+sc+')';
+        card.style.zIndex = 100-ao;
+        card.style.opacity = ao>2 ? 0 : (ao===0?1:(ao===1?0.95:0.6));
+        card.style.pointerEvents = ao>2 ? 'none':'auto';
+        card.classList.toggle('is-active', o===0);
+        const sf = card.querySelector('.cf-site'); if(sf) { const s=Math.max(W/1280,Hh/800); sf.style.transform='scale('+s+')'; sf.style.left=((W-1280*s)/2)+'px'; }
+      });
+      count.textContent = pad(active+1)+' / '+pad(slides.length);
+    }
+    function go(i){ const n=slides.length; active = ((i%n)+n)%n; layout(); }
+    cards.forEach((card,i)=>{
+      card.addEventListener('click', e=>{
+        if(moved) return;
+        if(i!==active){ go(i); return; }
+        open(i);
+      });
+    });
+    stage.addEventListener('pointerdown', e=>{ drag={x:e.clientX}; moved=false; });
+    window.addEventListener('pointermove', e=>{ if(drag && Math.abs(e.clientX-drag.x)>8) moved=true; });
+    window.addEventListener('pointerup', e=>{
+      if(!drag) return;
+      const dx = e.clientX-drag.x; drag=null;
+      if(Math.abs(dx)>50){ go(active + (dx<0?1:-1)); }
+      setTimeout(()=>{moved=false;},0);
+    });
+    c.querySelectorAll('.car-btn').forEach(b=>b.addEventListener('click', ()=>go(active+Number(b.dataset.dir))));
+    stage.addEventListener('keydown', e=>{
+      if(e.key==='ArrowRight'){ e.preventDefault(); go(active+1); }
+      if(e.key==='ArrowLeft'){ e.preventDefault(); go(active-1); }
+      if(e.key==='Enter'){ open(active); }
+    });
+    window.addEventListener('resize', layout);
+    if('ResizeObserver' in window) new ResizeObserver(layout).observe(c);
+    layout();
   });
 
   // Certificate lightbox
