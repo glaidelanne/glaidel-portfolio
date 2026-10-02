@@ -944,6 +944,9 @@
   .cs-b{left:-12px;bottom:-10px;font-size:13px;color:#fff;animation-delay:1.1s;}
   @media(max-width:480px){.cta-sticker{font-size:13px;padding:10px 16px 10px 14px;}}
   .cf-media img.cf-yt{transform:scale(1.36);transform-origin:center;}
+  .cf-close{position:absolute!important;top:14px;right:14px;float:none!important;margin:0!important;z-index:2000!important;}
+  .cf-modal-body .preview-link{z-index:5;}
+  .cf-go{z-index:3;}
 </style>
 </head>
 <body>
@@ -1500,7 +1503,7 @@
     </div>
 
     <!-- Website 1: Harborview -->
-    <div class="project">
+    <div class="project" data-cf-tags="AI Front Desk Agent|Buyer and Seller Funnels|Lead Scoring">
       <div class="project-grid">
         <div class="project-media">
           <div class="site-preview-frame">
@@ -1880,12 +1883,13 @@
       const shade = document.createElement('div'); shade.className='cf-shade';
       const txt = document.createElement('div'); txt.className='cf-text';
       const h3 = document.createElement('h3'); h3.textContent = clean(sl.querySelector('h3').textContent);
-      const p = sl.querySelector('.project-block p, .pr-block p');
+      const p = sl.querySelector('.project-block p, .pr-block p, .project-body > p');
       let d = p? clean(p.textContent):'';
       if(d.length>170){ d = d.slice(0,170); d = d.slice(0, d.lastIndexOf(' ')) + '…'; }
       const desc = document.createElement('p'); desc.className='cf-desc'; desc.textContent=d;
       const tags = document.createElement('div'); tags.className='cf-tags';
-      Array.from(sl.querySelectorAll('.project-stack span')).slice(0,3).forEach(s=>{ const t=document.createElement('span'); t.textContent=clean(s.textContent); tags.appendChild(t); });
+      const tl = sl.dataset.cfTags ? sl.dataset.cfTags.split('|') : Array.from(sl.querySelectorAll('.project-stack span')).map(s=>s.textContent);
+      tl.slice(0,3).forEach(s=>{ const t=document.createElement('span'); t.textContent=clean(s); tags.appendChild(t); });
       const go = document.createElement('button'); go.type='button'; go.className='cf-go'; go.setAttribute('aria-label','Open case study'); go.innerHTML='&rarr;';
       txt.append(h3, desc, tags);
       card.append(media, shade, pill, txt, go);
