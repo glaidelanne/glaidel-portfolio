@@ -943,6 +943,7 @@
   .cs-a{right:-14px;top:-12px;}
   .cs-b{left:-12px;bottom:-10px;font-size:13px;color:#fff;animation-delay:1.1s;}
   @media(max-width:480px){.cta-sticker{font-size:13px;padding:10px 16px 10px 14px;}}
+  .cf-media img.cf-yt{transform:scale(1.36);transform-origin:center;}
 </style>
 </head>
 <body>
@@ -1864,7 +1865,7 @@
       const mock = sl.querySelector('.mock-stage');
       if(yt){
         const id = (yt.src.match(/embed\/([\w-]+)/)||[])[1];
-        const im = document.createElement('img'); im.alt=''; im.loading='lazy';
+        const im = document.createElement('img'); im.alt=''; im.loading='lazy'; im.className='cf-yt';
         im.src = 'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg'; im.onerror=()=>im.remove();
         media.appendChild(im);
       } else if(site){
