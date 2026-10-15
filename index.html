@@ -496,6 +496,15 @@
   .cta-footer h2{font-family:var(--serif);font-size:clamp(30px,4.4vw,48px);font-weight:600;margin:0 0 18px;position:relative;}
   .cta-footer p{color:var(--text-1);font-size:16.5px;max-width:520px;margin:0 auto 32px;position:relative;}
   .cta-footer .hero-ctas{justify-content:center;position:relative;}
+  .tz-clocks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:34px auto 0;max-width:640px;position:relative;}
+  .tz-card{flex:1 1 240px;min-width:220px;padding:16px 20px;border-radius:16px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.22);color:#fff;text-align:center;backdrop-filter:blur(6px);}
+  .tz-label{font-size:11.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;opacity:0.78;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .tz-label i{width:7px;height:7px;border-radius:50%;background:#7CF0AE;box-shadow:0 0 0 0 rgba(124,240,174,0.6);animation:tzp 2s infinite;}
+  @keyframes tzp{70%{box-shadow:0 0 0 8px rgba(124,240,174,0);}100%{box-shadow:0 0 0 0 rgba(124,240,174,0);}}
+  .tz-time{font-size:34px;font-weight:700;line-height:1.15;margin:6px 0 2px;font-variant-numeric:tabular-nums;}
+  .tz-sub{font-size:13px;opacity:0.8;}
+  .tz-diff{width:100%;text-align:center;font-size:13.5px;color:#fff;opacity:0.9;margin-top:2px;}
+
   .btn-whatsapp{
     display:inline-flex;align-items:center;gap:8px;
     padding:14px 24px;border-radius:100px;font-weight:700;font-size:15px;
@@ -1725,6 +1734,11 @@
       <a class="btn-whatsapp" href="https://wa.me/639565540185" target="_blank" rel="noopener">WhatsApp</a>
       <a class="btn-secondary" href="mailto:glaidelluistro27@gmail.com">✉ Email Me</a>
     </div>
+    <div class="tz-clocks" id="tzClocks">
+      <div class="tz-card"><div class="tz-label"><i></i>My time (GMT+8)</div><div class="tz-time" id="tzMe">&nbsp;</div><div class="tz-sub" id="tzMeSub">Philippines</div></div>
+      <div class="tz-card"><div class="tz-label">Your time</div><div class="tz-time" id="tzYou">&nbsp;</div><div class="tz-sub" id="tzYouSub">Your local time</div></div>
+      <div class="tz-diff" id="tzDiff"></div>
+    </div>
   </div>
 </section>
 
@@ -1788,6 +1802,27 @@
       });
     });
   });
+
+
+  // Live clocks: my time (GMT+8) and the visitor's local time
+  (function(){
+    const meT=document.getElementById('tzMe'); if(!meT) return;
+    const youT=document.getElementById('tzYou'), meS=document.getElementById('tzMeSub'), youS=document.getElementById('tzYouSub'), diff=document.getElementById('tzDiff');
+    let vz; try{ vz=Intl.DateTimeFormat().resolvedOptions().timeZone; }catch(e){}
+    const tf=z=>{ try{ return new Intl.DateTimeFormat('en-US',Object.assign({hour:'numeric',minute:'2-digit'},z?{timeZone:z}:{})); }catch(e){ return new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit'}); } };
+    const df=z=>{ try{ return new Intl.DateTimeFormat('en-US',Object.assign({weekday:'short',month:'short',day:'numeric'},z?{timeZone:z}:{})); }catch(e){ return new Intl.DateTimeFormat('en-US',{weekday:'short',month:'short',day:'numeric'}); } };
+    const meTf=tf('Asia/Manila'), meDf=df('Asia/Manila'), youTf=tf(vz), youDf=df(vz);
+    const city=vz?vz.split('/').pop().replace(/_/g,' '):'Your local time';
+    youS.textContent=city;
+    function tick(){
+      const d=new Date();
+      meT.textContent=meTf.format(d); meS.textContent='Philippines, '+meDf.format(d);
+      youT.textContent=youTf.format(d); youS.textContent=city+', '+youDf.format(d);
+      const off=-d.getTimezoneOffset()/60, delta=8-off;
+      diff.textContent = Math.abs(delta)<0.01 ? 'We are in the same time zone.' : 'I am '+Math.abs(+delta.toFixed(2))+' hour'+(Math.abs(delta)===1?'':'s')+(delta>0?' ahead of you.':' behind you.');
+    }
+    tick(); setInterval(tick,15000);
+  })();
 
   // Timeline scroll-in animation (Process section)
   const timelineEls = document.querySelectorAll('.timeline, .tl-step');
